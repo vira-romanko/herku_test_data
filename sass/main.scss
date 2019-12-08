@@ -1,0 +1,152 @@
+@import 'modules/_vars';
+@import 'modules/_purple';
+@import 'modules/_books';
+@import 'modules/_lightbox';
+@import 'modules/_media';
+@import 'modules/_errors';
+
+body {
+    color: $main-color;
+    background-color: $body-bg;
+    font-family: 'Vollkorn', serif;
+}
+
+
+h1, h2, h3 { 
+    color: $heading-color
+ }
+ .hidden{
+    display:none;
+}
+
+//top static quote 
+main{
+    position: relative;
+    .main-q{
+        font-family: 'Vollkorn', serif;
+        font-size: 4vh;
+        //margin-top: 20px;
+        padding: 20px;
+        margin : 20px auto; 
+  
+        position : relative; 
+        max-width : 600px; 
+         span{
+             color:$dark-salmon;
+         
+             font-size: 7vh;
+             font-weight: bold;
+         }
+ 
+        }
+        .main-q-2 blockquote {
+            padding-top : 140px; 
+          }
+
+          .attribution {
+            text-align : right; 
+            margin-right: 20px;
+        
+            
+          } 
+          
+           .author {
+            color:$light-salmon;
+            font-size : 2.75vh; 
+            font-weight : bold; 
+            text-shadow : 0 1px 1px rgba(255, 255, 255, 0.1); 
+            text-transform : uppercase;
+            
+           }
+        
+
+
+
+//some raw css- circle quote
+.main-q-2 blockquote:after {
+    background: none repeat scroll 0 0 $red;
+    border-radius: 60% 60% 60% 60%;
+    color: $light-salmon; //rgba(255, 255, 255, 0.5);
+    content: "❞";
+    font-family: 'Vollkorn', serif;
+    font-size: 50px;
+    height: 100px;
+    left: 50%;
+    line-height: 130px;
+    margin-left: -65px;
+    position: absolute;
+    text-align: center;
+    text-shadow: 0 1px 1px rgba(255, 137, 132, 0.1);
+    top: 0;
+    width: 100px;
+    margin-top: 20px;
+}
+}
+
+
+//book name
+ h1{
+     font-size: 3vh;
+     
+    
+     &:hover{
+         
+         color: $red;
+        
+     }
+ }
+
+
+ //light purple section
+.panel { min-height: 60vh; }
+
+
+
+//back to top
+#to-top {
+    color: rgba(255, 137, 132, 0.8);
+    font-family: 'Vollkorn', serif;
+    font-size:3vh;
+    font-weight: bold;
+    float: right;
+    margin: 20px;
+    padding: 10px;
+    background-color:$red;
+    border-radius: 5vh;
+    text-decoration: none;
+    opacity: 0.75;
+
+    &:hover{
+  animation-name: example;
+  animation-duration: 1s;
+}
+@keyframes example {
+  from {color: $light-salmon;}
+  to {color: $body-bg;}
+}
+      }
+      //click on the names below p
+      .subheader{
+          margin-left: 30px;
+          opacity: 0.8;
+          font-family: 'Arvo', serif;
+          font-size: 2.75vh;
+          color:#3e3d4b;
+      }
+
+
+
+
+
+//palallex banner for book section
+.purple
+ {
+  width: 100%;
+  height: 80vh;
+  perspective: 1px;
+  transform: translateZ(-1px);
+  overflow-x: hidden;
+  overflow-y: auto;
+  
+ 
+}
