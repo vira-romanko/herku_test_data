@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const sql = require('../utils/sql');
+const connect = require('../utils/sqlConnect');
 
 
 
@@ -10,34 +10,48 @@ const sql = require('../utils/sql');
 router.get('/', (req, res) => {
     // should really get the user data here and then fetch it thru, but let's try this asynchronously
     console.log('at the main route');
+    connect.getConnection((err, connection) => {
+		if (err) { return console.log(error.message); }
+        let query = `SELECT  * FROM tbl_books WHERE ID="${req.params.id}"`;
 
-    let query = "SELECT ID, cover, name FROM tbl_books";
+		
+		connect.query(query, (err, rows) => {
+			connection.release(); // send this connection back to the pool
 
-    sql.query(query, (err, result) => {
-        if (err) { throw err; console.log(err); }
+			if (err) {
+				// will exit the function and log the error
+				return console.log(err.message);
+			}
 
-        console.log(result); // should see objects wrapped in an array
+			console.log(result);// this should be your database query result
 
-        // render the home view with dynamic data
-        res.render('index', { data: result });
-     
-        
-
-       
-    })
+			// render our page
+			res.render('index', { data: result }); // whatever page and data you're rendering
+		});
+	});
 })
+
 //looling for localhost:3000/anything
 router.get('/books/:id', (req, res) => {
     console.log("hit a dynamic route");
     console.log(req.params.id);
 
 
-    let query = `SELECT  * FROM tbl_books WHERE ID="${req.params.id}"`;
 
-    sql.query(query, (err, result) => {
-        if (err) { throw err; console.log(err); }
+    connect.getConnection((err, connection) => {
+        if (err) { return console.log(error.message); }
 
-        console.log(result); // should see objects wrapped in an array
+
+	
+
+		connect.query(query, (err, rows) => {
+			connection.release(); // send this connection back to the pool
+
+			if (err) {
+				// will exit the function and log the error
+				return console.log(err.message);
+            }
+            console.log(result); // should see objects wrapped in an array
         // turn our social property into an array - its just text in the DB
         // wich isnt really anything we can work with
 
@@ -53,9 +67,9 @@ router.get('/books/:id', (req, res) => {
         // render the home view with dynamic data
         //res.render('home', { data: result });
         res.json(result);
-
-       
-    })
+		});
+	});
 })
+
 
 module.exports = router;
