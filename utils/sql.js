@@ -6,7 +6,10 @@ const connect = sql.createConnection({
     port: config.port,
     user: config.uname,
     password: config.pname,
-    database: config.db
+    database: config.db,
+    connectionLimit : 20,
+     queueLimit : 100,
+    waitForConnections : true
 })
 
 module.exports = connect;

@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const sql = require('../utils/sqlConnect');
+const sql = require('../utils/sql');
 
 
 
