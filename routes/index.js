@@ -11,13 +11,12 @@ router.get('/', (req, res) => {
     // should really get the user data here and then fetch it thru, but let's try this asynchronously
     console.log('at the main route');
 
-    let query = "SELECT ID, cover, name FROM tbl_books";
+     query = "SELECT ID, cover, name FROM tbl_books";
 
-    sql.query(query, (err, result) => {
+    sql.query((err, result) => {
         if (err) { throw err; console.log(err); }
 
-        console.log(result); // should see objects wrapped in an array
-
+        connection.release();
         // render the home view with dynamic data
         res.render('index', { data: result });
      
@@ -32,7 +31,7 @@ router.get('/books/:id', (req, res) => {
     console.log(req.params.id);
 
 
-    let query = `SELECT  * FROM tbl_books WHERE ID="${req.params.id}"`;
+    query = `SELECT  * FROM tbl_books WHERE ID="${req.params.id}"`;
 
     sql.query(query, (err, result) => {
         if (err) { throw err; console.log(err); }
