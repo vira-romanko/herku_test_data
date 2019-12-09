@@ -1,9 +1,10 @@
 const config = {
-    host: "localhost",
-    port: 8889, // 8889 for mac
-    uname: "root",
-    pword: "root", // leave blank for windows
-    database: "db_favthings"
-}
-
-module.exports = config;
+    host: "us-cdbr-iron-east-05.cleardb.net",
+    port: 3306, 
+    uname: "b0df3641b70d8b",
+    pword: "f622741a", 
+    database: "heroku_d3bc50f9027c606?"
+  }
+  
+  module.exports = config;
+  
