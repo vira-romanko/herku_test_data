@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const sql = require('../utils/sql');
+const connect = require('../utils/sql');
 
 
 
@@ -10,20 +10,24 @@ const sql = require('../utils/sql');
 router.get('/', (req, res) => {
     // should really get the user data here and then fetch it thru, but let's try this asynchronously
     console.log('at the main route');
+    connect.getConnection((err, connection) => {
+		if (err) { return console.log(error.message); }
 
-     query = "SELECT ID, cover, name FROM tbl_books";
 
-    sql.query((err, result) => {
+      let query = "SELECT ID, cover, name FROM tbl_books";
+
+    connect.query( query,(err, result) => {
+        connection.release();
         if (err) { throw err; console.log(err); }
 
-        connection.release();
+       console.log(result);
         // render the home view with dynamic data
         res.render('index', { data: result });
      
-        
+    }); 
 
        
-    })
+    });
 })
 //looling for localhost:3000/anything
 router.get('/books/:id', (req, res) => {
@@ -31,9 +35,9 @@ router.get('/books/:id', (req, res) => {
     console.log(req.params.id);
 
 
-    query = `SELECT  * FROM tbl_books WHERE ID="${req.params.id}"`;
+     let query = `SELECT  * FROM tbl_books WHERE ID="${req.params.id}"`;
 
-    sql.query(query, (err, result) => {
+    connect.query(query, (err, result) => {
         if (err) { throw err; console.log(err); }
 
         console.log(result); // should see objects wrapped in an array
