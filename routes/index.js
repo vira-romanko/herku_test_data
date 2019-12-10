@@ -20,7 +20,7 @@ router.get('/', (req, res) => {
         connection.release();
         if (err) { throw err; console.log(err); }
 
-       console.log(result);
+       //console.log(result);
         // render the home view with dynamic data
         res.render('index', { data: result });
      
